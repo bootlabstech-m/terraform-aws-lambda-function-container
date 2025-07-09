@@ -65,8 +65,6 @@ count                          = var.no_of_functions
 image_uri                      = var.image_uri
 function_name                  = var.name[count.index]
 role                           = aws_iam_role.lambda_role.arn
-# handler                        = var.handler
-# runtime                        = var.runtime
 depends_on                     = [aws_iam_role_policy_attachment.attach_iam_policy_to_iam_role]
 memory_size                    = var.memory_size
 timeout                        = var.timeout 
@@ -76,6 +74,9 @@ environment {
 }
 
   lifecycle {
-    ignore_changes = [tags]
+    ignore_changes = [
+      tags,
+      environment
+    ]
   }
 }
